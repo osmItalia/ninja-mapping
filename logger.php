@@ -50,16 +50,17 @@ function logPosition(){
 }
 
 function sendPoint(geoObj,note)
-{
-	var timestamp=geoObj['timestamp'];
-	var coords=geoObj['coords'];
-	var lat=coords['lat'];
-	var lon=coords['lon'];
-	var accuracy=coords['accuracy'];
-	var altitude=coords['altitude'];
-	var speed=coords['speed'];
-	var direction=coords['heading'];
-}
+        {
+        var timestamp=geoObj.timestamp;
+        var lat = geoObj.coords.latitude;
+        var lon = geoObj.coords.longitude;
+        var alt = geoObj.coords.altitude;
+        var accuracy = geoObj.coords.accuracy;
+        var speed = geoObj.coords.speed;
+        var direction =  geoObj.coords.heading;
+
+        }
+
 
 function watchSuccess(pos){
 	sendPoint(pos,'');
