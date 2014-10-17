@@ -50,16 +50,30 @@ function logPosition(){
 }
 
 function sendPoint(geoObj,note)
-        {
-        var timestamp=geoObj.timestamp;
-        var lat = geoObj.coords.latitude;
-        var lon = geoObj.coords.longitude;
-        var alt = geoObj.coords.altitude;
-        var accuracy = geoObj.coords.accuracy;
-        var speed = geoObj.coords.speed;
-        var direction =  geoObj.coords.heading;
+{
+        var timestamp= (typeof geoObj.timestamp != undefined) ? geoObj.timestamp : '';
+        var lat = (typeof geoObj.coords.latitude != undefined) ? geoObj.coords.latitude : '';
+        var lon = (typeof geoObj.coords.longitude != undefined) ? geoObj.coords.longitude : '';
+        var alt = (typeof geoObj.coords.altitude != undefined) ? geoObj.coords.altitude : '';
+        var accuracy = (typeof geoObj.coords.accuracy != undefined) ? geoObj.coords.accuracy : '';
+        var sp = (typeof geoObj.coords.speed != undefined) ? geoObj.coords.speed : '';
+        var direction =  (typeof geoObj.coords.heading != undefined) ? geoObj.coords.heading : '';
+		
+		var uid=1;
+		var req='uid='+uid+'&lat='+lat+'&lon='+lon+'&ts='+timestamp+'&prec='+accuracy+'&sp='+sp+'&alt='+alt+'&dir='+direction+'&nota='+note;
 
-        }
+		request = new XMLHttpRequest();
+		request.open('GET', 't.php?'+req, true);
+
+		request.onload = function() {
+		  if (request.status >= 200 && request.status < 400){
+			resp = request.responseText;
+			console.log(resp);
+		  } else {console.log('error');}
+		};
+		request.onerror = function() {console.log('req error');};
+		request.send();
+}
 
 
 function watchSuccess(pos){
