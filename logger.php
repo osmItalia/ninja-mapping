@@ -4,15 +4,21 @@ STUB
 - auth
 */
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-</head>
-<body>
-<input type="text" id="note" value=""/>
-<button onclick="submitData()">Submit Point</button>
-<br/>
-<input type="checkbox" id="togglePos" onclick="logPosition()"/><label for="togglePos">Track Position</label>
+<?php include('header.php');?>
+    <div class="row">
+     <div class="col-md-12">
+
+<div class="control-group">
+  <div class="controls">
+      <input id="note" value="" class="form-control " placeholder="Insert note" type="text"/>
+        <button onclick="submitData()" class="btn btn-default">Submit Point</button>
+    <label class="checkbox" for="togglePos">
+      <input type="checkbox" name="togglePos" id="togglePos" value=""  onclick="logPosition()">
+      Track Position
+    </label>
+  </div>
+</div>
+
 <script>
 var options={
 	enableHighAccuracy: true,
@@ -24,6 +30,7 @@ var idWatch=0;
 
 function submitData(){
 	navigator.geolocation.getCurrentPosition(currentSuccess,echoError,options);
+	document.getElementById('note').value='';
 }
 
 function currentSuccess(pos){
@@ -65,15 +72,12 @@ function sendPoint(geoObj,note)
 		// user_id e event_id saranno presi in fase di autenticazione dell'utente
 		var req='uid='+uid+'&eid='+eid+'&lat='+lat+'&lon='+lon+'&ts='+timestamp+'&prec='+accuracy+'&sp='+sp+'&alt='+alt+'&dir='+direction+'&nota='+note;
 		
-		console.log(geoObj);
-		console.log(req);
 		request = new XMLHttpRequest();
 		request.open('GET', 't.php?'+req, true);
 
 		request.onload = function() {
 		  if (request.status >= 200 && request.status < 400){
 			resp = request.responseText;
-			console.log(resp);
 		  } else {console.log('error');}
 		};
 		request.onerror = function() {console.log('req error');};
@@ -88,5 +92,6 @@ function echoError(err){
 	console.log(err);
 }
 </script>
-</body>
-</html>
+        </div>
+     </div>
+<?php include('footer.php');?>
