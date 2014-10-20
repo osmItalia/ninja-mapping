@@ -2,7 +2,6 @@
 /*
 STUB
 - auth
-- ajax submission in sendpoint
 */
 ?>
 <!DOCTYPE html>
@@ -60,7 +59,9 @@ function sendPoint(geoObj,note)
         var direction =  (typeof geoObj.coords.heading != undefined) ? geoObj.coords.heading : '';
 		
 		var uid=1;
-		var req='uid='+uid+'&lat='+lat+'&lon='+lon+'&ts='+timestamp+'&prec='+accuracy+'&sp='+sp+'&alt='+alt+'&dir='+direction+'&nota='+note;
+		var eid=1;
+		// user_id e event_id saranno presi in fase di autenticazione dell'utente
+		var req='uid='+uid+'&eid='+eid+'&lat='+lat+'&lon='+lon+'&ts='+timestamp+'&prec='+accuracy+'&sp='+sp+'&alt='+alt+'&dir='+direction+'&nota='+note;
 
 		request = new XMLHttpRequest();
 		request.open('GET', 't.php?'+req, true);
