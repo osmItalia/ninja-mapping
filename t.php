@@ -3,6 +3,7 @@
 if (isset($_GET['lat']))
 {
 $uid=$_GET['uid'];
+$eid=$_GET['eid'];
 $lat=$_GET['lat'];
 $lon=$_GET['lon'];
 $ts=$_GET['ts'];
@@ -18,8 +19,7 @@ $dbh = new SQLite3($file);
 
 $nota_quoted = SQLite3::escapeString($nota);
 
-
-$sql = "insert into track ('user_id','lat', 'lon', 'timestamp','altitude', 'speed','direction', 'accuracy','note') values ('$uid',$lat,$lon,'$ts',$alt,$speed,$dir,$hdop,'$nota_quoted')";
+$sql = "insert into track ('user_id','event_id','lat', 'lon', 'timestamp','altitude', 'speed','direction', 'accuracy','note') values ('$uid','$eid',$lat,$lon,'$ts',$alt,$speed,$dir,$hdop,'$nota_quoted')";
 
 $dbh->exec($sql);
 
