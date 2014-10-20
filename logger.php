@@ -58,7 +58,7 @@ function sendPoint(geoObj,note)
         alt = (geoObj.coords.altitude != null) ? geoObj.coords.altitude : -1;
         accuracy = (geoObj.coords.accuracy != null) ? geoObj.coords.accuracy : -1;
         sp = (geoObj.coords.speed != null) ? geoObj.coords.speed : -1;
-        direction =  (geoObj.coords.heading != null) ? geoObj.coords.heading : -1;
+        var direction = (isNaN(geoObj.coords.heading)) ? -1 : geoObj.coords.heading ;
 		
 		var uid=1;
 		var eid=1;
