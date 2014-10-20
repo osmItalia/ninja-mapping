@@ -50,19 +50,23 @@ function logPosition(){
 
 function sendPoint(geoObj,note)
 {
-        var timestamp= (typeof geoObj.timestamp != undefined) ? geoObj.timestamp : '';
-        var lat = (typeof geoObj.coords.latitude != undefined) ? geoObj.coords.latitude : '';
-        var lon = (typeof geoObj.coords.longitude != undefined) ? geoObj.coords.longitude : '';
-        var alt = (typeof geoObj.coords.altitude != undefined) ? geoObj.coords.altitude : '';
-        var accuracy = (typeof geoObj.coords.accuracy != undefined) ? geoObj.coords.accuracy : '';
-        var sp = (typeof geoObj.coords.speed != undefined) ? geoObj.coords.speed : '';
-        var direction =  (typeof geoObj.coords.heading != undefined) ? geoObj.coords.heading : '';
+		var timestamp,lat,lon,alt,accuracy,sp,direction;
+
+        timestamp= (geoObj.timestamp != null) ? geoObj.timestamp : -1;
+        lat = (geoObj.coords.latitude != null) ? geoObj.coords.latitude : -1;
+        lon = (geoObj.coords.longitude != null) ? geoObj.coords.longitude : -1;
+        alt = (geoObj.coords.altitude != null) ? geoObj.coords.altitude : -1;
+        accuracy = (geoObj.coords.accuracy != null) ? geoObj.coords.accuracy : -1;
+        sp = (geoObj.coords.speed != null) ? geoObj.coords.speed : -1;
+        direction =  (geoObj.coords.heading != null) ? geoObj.coords.heading : -1;
 		
 		var uid=1;
 		var eid=1;
 		// user_id e event_id saranno presi in fase di autenticazione dell'utente
 		var req='uid='+uid+'&eid='+eid+'&lat='+lat+'&lon='+lon+'&ts='+timestamp+'&prec='+accuracy+'&sp='+sp+'&alt='+alt+'&dir='+direction+'&nota='+note;
-
+		
+		console.log(geoObj);
+		console.log(req);
 		request = new XMLHttpRequest();
 		request.open('GET', 't.php?'+req, true);
 
