@@ -1,3 +1,7 @@
+<?php
+include_once('lib/ulogin.php');
+$a=new Auth('/ninja-mapping','database.sqlite');
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,7 +30,17 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Home</a></li>
+			<?php if($a->authenticated()):?>
+			<li><a href="logger.php">Logger</a></li>
+            <?php endif; ?>
           </ul>
+		<ul class="nav navbar-nav navbar-right">
+				<?php if($a->authenticated()):?>
+				<li><a href="logout.php">Logout</a></li>
+                <?php else: ?>
+				<li><a href="login.php">Login</a></li>
+                <?php endif; ?>
+            </ul>
         </div>
       </div>
     </div>
