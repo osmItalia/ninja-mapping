@@ -1,9 +1,3 @@
-<?php
-/*
-STUB
-- auth
-*/
-?>
 <?php include('header.php');?>
     <div class="row">
      <div class="col-md-12">
@@ -16,6 +10,7 @@ STUB
       <input type="checkbox" name="togglePos" id="togglePos" value=""  onclick="logPosition()">
       Track Position
     </label>
+
   </div>
 </div>
 

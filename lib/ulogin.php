@@ -111,5 +111,10 @@ class Auth{
 		return $this->loginAction($this->getUsername(), $password);
 	}
 
+	public function getEventsByUser($id){
+		$pdo=$this->db->query("SELECT event.id AS id, event.name AS name FROM gr_user,event WHERE  gr_user.event_id=event.id AND  gr_user.user_id=$id");
+		$events=$pdo->fetchAll();
+		return $events;
+	}
 }
 ?>

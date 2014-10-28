@@ -36,7 +36,7 @@ $a=new Auth('/ninja-mapping','database.sqlite');
           </ul>
 		<ul class="nav navbar-nav navbar-right">
 				<?php if($a->authenticated()):?>
-				<li><a href="logout.php">Logout</a></li>
+				<li><a href="logout.php">(<?php echo $a->getUsername(); ?>) Logout</a></li>
                 <?php else: ?>
 				<li><a href="login.php">Login</a></li>
                 <?php endif; ?>
