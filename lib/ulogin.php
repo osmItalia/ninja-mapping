@@ -116,5 +116,14 @@ class Auth{
 		$events=$pdo->fetchAll();
 		return $events;
 	}
+
+	public function setEvent($id,$event_id){
+		$pdo=$this->db->query("SELECT name FROM event WHERE id=$event_id ");
+		$event = $pdo->fetch();
+		$_SESSION['event_id']=$event_id;
+		$_SESSION['event_name']=$event['name'];
+
+		return $event['name'];
+	}
 }
 ?>

@@ -2,9 +2,15 @@
     <div class="row">
      <div class="col-md-12">
 
+<?php 
+	if( !isset( $_SESSION['event_id'])) {
+		echo "<h1>Evento non selezionato</h1>\n<h2>Selezionare evento nella configurazione prima di continuare</h2>\n";
+		}
+?>
+
 <div class="control-group">
   <div class="controls">
-      <input id="note" value="" class="form-control " placeholder="Insert note" type="text"/>
+      <input id="note" value="" class="form-control" placeholder="Insert note" type="text"/>
         <button onclick="submitData()" class="btn btn-default">Submit Point</button>
     <label class="checkbox" for="togglePos">
       <input type="checkbox" name="togglePos" id="togglePos" value=""  onclick="logPosition()">
@@ -25,12 +31,12 @@ var idWatch=0;
 
 function submitData(){
 	navigator.geolocation.getCurrentPosition(currentSuccess,echoError,options);
-	document.getElementById('note').value='';
 }
 
 function currentSuccess(pos){
 	var note=document.getElementById('note').value;
 	sendPoint(pos,note);
+	document.getElementById('note').value='';
 }
 
 function logPosition(){
@@ -52,7 +58,7 @@ function logPosition(){
 
 function sendPoint(geoObj,note)
 {
-		var timestamp,lat,lon,alt,accuracy,sp,direction;
+	var timestamp,lat,lon,alt,accuracy,sp,direction;
 
         timestamp= (geoObj.timestamp != null) ? geoObj.timestamp : -1;
         lat = (geoObj.coords.latitude != null) ? geoObj.coords.latitude : -1;
@@ -62,11 +68,11 @@ function sendPoint(geoObj,note)
         sp = (geoObj.coords.speed != null) ? geoObj.coords.speed : -1;
         var direction = (isNaN(geoObj.coords.heading)) ? -1 : geoObj.coords.heading ;
 		
-		var uid=1;
-		var eid=1;
+		var uid=<?php echo $a->getUid(); ?>;
+		var eid=<?php if(isset( $_SESSION['event_id'])) echo  $_SESSION['event_id']; else echo "-1"; ?>;
 		// user_id e event_id saranno presi in fase di autenticazione dell'utente
-		var req='uid='+uid+'&eid='+eid+'&lat='+lat+'&lon='+lon+'&ts='+timestamp+'&prec='+accuracy+'&sp='+sp+'&alt='+alt+'&dir='+direction+'&nota='+note;
-		
+		var req='uid='+uid+'&eid='+eid+'&lat='+lat+'&lon='+lon+'&ts='+timestamp+'&prec='+accuracy+'&sp='+sp+'&alt='+alt+'&dir='+direction+'&note='+note;
+
 		request = new XMLHttpRequest();
 		request.open('GET', 't.php?'+req, true);
 

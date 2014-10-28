@@ -11,9 +11,9 @@ $hdop=round($_GET['prec']);
 $speed=round($_GET['sp']);
 $alt=round($_GET['alt']);
 $dir=round($_GET['dir']);
-$nota=substr($_GET['nota'],0,255);
+$nota=substr($_GET['note'],0,255);
 
-$file='/var/www/db/nm_db.sqlite';
+$file='database.sqlite';
 
 $dbh = new SQLite3($file);
 

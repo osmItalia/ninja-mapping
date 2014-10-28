@@ -32,6 +32,7 @@ $a=new Auth('/ninja-mapping','database.sqlite');
             <li><a href="index.php">Home</a></li>
 			<?php if($a->authenticated()):?>
 			<li><a href="logger.php">Logger</a></li>
+			<li><a href="info.php">Info/settings</a></li>
             <?php endif; ?>
           </ul>
 		<ul class="nav navbar-nav navbar-right">
