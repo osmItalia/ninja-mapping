@@ -24,16 +24,14 @@
 
 	?>
 	</b></p>
-	<?php
-		if(isset($_POST["ev"]) || isset( $_SESSION['event_name'])) {
-			 echo "<form  class=\"form-horizontal\" id=\"form_u\" action=\"". $_SERVER['PHP_SELF'] ."\" method=\"post\"\n";
-			echo " <fieldset>\n";
-			echo " <input type=\"hidden\" name=\"no_ev\" value=\"null\">\n";
-			echo " <input  class=\"btn btn-default\" type=\"submit\" value=\"Abandon event\">\n";
-			echo " </fieldset>\n";
-			echo " </form>\n";
-			}
-	?>
+	<?php if(isset($_POST["ev"]) || isset( $_SESSION['event_name'])): ?>
+			<form  class="form-horizontal" id="form_u" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+			<fieldset>
+			<input type="hidden" name="no_ev" value="null">
+			<input  class="btn btn-default" type="submit" value="Abandon event">
+			</fieldset>
+			</form>
+	<?php endif; ?>
 	Seleziona evento:<br/>
 	<form  class="form-horizontal" id="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 	<fieldset>

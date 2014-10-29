@@ -2,23 +2,20 @@
     <div class="row">
      <div class="col-md-12">
 
-<?php 
-	if( !isset( $_SESSION['event_id'])) {
-		echo "<div class=\"alert alert-danger\" role=\"alert\">\n";
-		echo "<p><a href=\"info.php\" class=\"alert-link\">Selezionare evento</a> nella configurazione prima di continuare</p>\n";
-		echo "</div>\n";
-		}
-?>
-
-<div class="control-group">
-  <div class="controls">
-      <input id="note" value="" class="form-control" placeholder="Insert note" type="text"/>
-        <button onclick="submitData()" class="btn btn-default">Submit Point</button>
-    <label class="checkbox" for="togglePos">
-      <input type="checkbox" name="togglePos" id="togglePos" value=""  onclick="logPosition()">
-      Track Position
-    </label>
-
+<?php if( !isset( $_SESSION['event_id'])): ?>
+	<div class="alert alert-danger" role="alert">
+	<p><a href="info.php" class="alert-link">Selezionare evento</a> nella configurazione prima di continuare</p>
+	</div>
+<?php else: ?>
+	<div class="control-group">
+	  <div class="controls">
+	      <input id="note" value="" class="form-control" placeholder="Insert note" type="text"/>
+	        <button onclick="submitData()" class="btn btn-default">Submit Point</button>
+	    <label class="checkbox" for="togglePos">
+	      <input type="checkbox" name="togglePos" id="togglePos" value=""  onclick="logPosition()">
+	      Track Position
+	    </label>
+<?php endif; ?>	
   </div>
 </div>
 
