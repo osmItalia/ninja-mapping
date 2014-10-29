@@ -4,7 +4,9 @@
 
 <?php 
 	if( !isset( $_SESSION['event_id'])) {
-		echo "<div class=\"alert alert-danger\" role=\"alert\"><b>Evento non selezionato</b><br/><h2>Selezionare evento nella configurazione prima di continuare</h2></div>";
+		echo "<div class=\"alert alert-danger\" role=\"alert\">\n";
+		echo "<p><a href=\"info.php\" class=\"alert-link\">Selezionare evento</a> nella configurazione prima di continuare</p>\n";
+		echo "</div>\n";
 		}
 ?>
 
