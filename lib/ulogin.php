@@ -125,5 +125,13 @@ class Auth{
 
 		return $event['name'];
 	}
+
+	public function unsetEvent(){
+		unset($_SESSION['event_id']);
+		unset($_SESSION['event_name']);
+	}
+
+
+
 }
 ?>
