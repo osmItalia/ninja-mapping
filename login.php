@@ -7,7 +7,7 @@ if (isset($_POST["un"])&&isset($_POST["pw"]))
 	$password = $_POST["pw"];
  $a=new Auth('/ninja-mapping','database.sqlite');
 	if ($a->login($username, $password)) {
-		if(isset($_POST['l']) &&$_POST['l']!=="" && !strstr($_POST['l'],'logout'))
+		if(isset($_POST['l']) && $_POST['l']!=="" && !strstr($_POST['l'],'logout'))
 		{
 		header("Location: http://".$_SERVER['SERVER_NAME'].urldecode($_POST['l']));
 		}

@@ -89,14 +89,13 @@ class Auth{
 	public function loginAction($username, $password) {
 		$pdo=$this->db->query("SELECT * FROM user WHERE username = '$username'");
 		$user=$pdo->fetch();
-		if($user==false) return -1;
+		if(is_null($user)) return -1;
 		$password = md5($password);
 		if($password === $user['password']){ 
 			$logged_in = $user['id'];
 		} else {
 			$logged_in = false;
 		}
-		var_dump($logged_in);
 		return $logged_in;
 	}	
 	

@@ -9,8 +9,10 @@
 <?php else: ?>
 	<div class="control-group">
 	  <div class="controls">
+	    <div class="form-inline">
 	      <input id="note" value="" class="form-control" placeholder="Insert note" type="text"/>
 	        <button onclick="submitData()" class="btn btn-default">Submit Point</button>
+	    </div>
 	    <label class="checkbox" for="togglePos">
 	      <input type="checkbox" name="togglePos" id="togglePos" value=""  onclick="logPosition()">
 	      Track Position

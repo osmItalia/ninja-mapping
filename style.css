@@ -1,6 +1,8 @@
+@media screen and (max-width:768px){input#note{width:100%}}
 body {
   padding-top: 70px;
 }
 .btn-group{width:100%;}
-.btn-default{width:20%}
 ul.list{list-style:none;}
+label.checkbox{margin-left:20px;}
+input#note {width: 75%;}
