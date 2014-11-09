@@ -1,5 +1,5 @@
 <?php
-include('lib/ulogin.php');
-$a=new Auth('/ninja-mapping','database.sqlite');
+include_once('conf.php');
+$a=new Auth($basepath,$dbFile);
 $a->logout();
 ?>
