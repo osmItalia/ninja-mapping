@@ -113,7 +113,6 @@ function getLayer(){
         var f=res['features'];
         $(f).each(function(i,j){
             var id=j['properties']['user_id'];
-console.log(id);
             var coords=j['geometry']['coordinates'];
             if(markers[id]!==undefined){
                 markers[id].setLatLng([coords[1],coords[0]]);
