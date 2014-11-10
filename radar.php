@@ -19,6 +19,7 @@ padding:5px;
 .b{font-weight:bold;}
 .i{font-style:italic;
 font-size:14px;}
+
 </style>
 
 <div id="show">
@@ -101,7 +102,8 @@ var hash = new L.Hash(map);
 
 
 var dati_update = function (props) {
-document.getElementById('dati').innerHTML = (props ? '<p class="b">'+  props.user_id +'</p><p  class="collapse">Ora: '+ props.timestamp +' <br>Altitudine: '+ props.altitude +' <br>Direzione: '+ props.direction +'°<br>Precisione: '+ props.accuracy +' m<br> Note:  '+ props.note +'</p>' : 'n/d');
+document.getElementById('dati').innerHTML = (props ? '<p class="b">'+  props.user_id +'</p><p>Ora: '+ props.timestamp +' <br>Altitudine: '+ props.altitude +' <br>Direzione: '+ props.direction +'°<br>Precisione: '+ props.accuracy +' m<br> Note:  '+ props.note +'</p>' : 'n/d');
+//document.getElementById('dati').innerHTML = (props ? '<p class="b">'+  props.user_id +'</p><p class="collapse">Ora: '+ props.timestamp +' <br>Altitudine: '+ props.altitude +' <br>Direzione: '+ props.direction +'°<br>Precisione: '+ props.accuracy +' m<br> Note:  '+ props.note +'</p>' : 'n/d');
 };
 
 
@@ -110,7 +112,8 @@ function getLayer(){
     $.getJSON('api/getEventLastPoint.php',{e:"<?php if(isset($_SESSION['event_id'])) echo $_SESSION['event_id'];?>"},function (res) {
         var f=res['features'];
         $(f).each(function(i,j){
-            var id=j['properties']['user'];
+            var id=j['properties']['user_id'];
+console.log(id);
             var coords=j['geometry']['coordinates'];
             if(markers[id]!==undefined){
                 markers[id].setLatLng([coords[1],coords[0]]);
