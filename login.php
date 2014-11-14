@@ -1,7 +1,10 @@
 <?php
 include_once('conf.php');
+//don't force login, this page already does it
+$NOLOGIN=1;
 $message='';
-if (isset($_POST["un"])&&isset($_POST["pw"]))
+
+if (isset($_POST["un"])&& isset($_POST["pw"]))
 {
     $username = $_POST["un"];
     $password = $_POST["pw"];

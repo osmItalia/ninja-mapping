@@ -57,7 +57,7 @@ class Auth{
 			setcookie($this->id_cookie, "", time() - 3600, "/");
 			$_SESSION = array();
 			session_destroy();
-			$this->redirectToLogin($url);
+			//$this->redirectToLogin($url);
 	}
 	private function redirectToLogin() {
 		$oldloc=$_SERVER['REQUEST_URI'];

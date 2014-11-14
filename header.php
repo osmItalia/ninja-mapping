@@ -1,6 +1,10 @@
 <?php
 include_once('conf.php');
 $a=new Auth($basepath,$dbFile);
+
+//force authentication except for the pages with $NOLOGIN=1;
+if(!isset($NOLOGIN) || $NOLOGIN != 1)
+	$a->forceAuthentication();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,9 +35,10 @@ $a=new Auth($basepath,$dbFile);
           <ul class="nav navbar-nav">
             <li><a href="index.php">Home</a></li>
 			<?php if($a->authenticated()):?>
-			<li><a href="logger.php">Logger</a></li>
-            <li><a href="info.php">Info/settings</a></li>
-            <?php endif; ?>
+				<li><a href="logger.php">Logger</a></li>
+	            		<li><a href="info.php">Info/settings</a></li>
+				<li><a href="radar.php">Radar</a></li>
+            		<?php endif; ?>
           </ul>
 		<ul class="nav navbar-nav navbar-right">
 				<?php if($a->authenticated()):?>
