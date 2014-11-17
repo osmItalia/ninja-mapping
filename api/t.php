@@ -1,5 +1,9 @@
 <?php
 include_once('../conf.php');
+
+$a=new Auth($basepath,$dbFile);
+$a->forceAuthentication();
+
 if (isset($_GET['lat']))
 {
     $uid=$_GET['uid'];

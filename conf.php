@@ -1,5 +1,8 @@
 <?php
 $basepath="/ninja-mapping";
-$dbFile="database.sqlite";
+$absolutepath="/var/www/html" . $basepath;
+$dbName="database.sqlite";
+$dbFile=$absolutepath.'/'.$dbName;
+
 include('lib/ulogin.php');
 ?>

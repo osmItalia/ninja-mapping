@@ -26,6 +26,7 @@ if (isset($_POST["un"])&& isset($_POST["pw"]))
      <div class="col-md-12">
         <form class="form-horizontal" id="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
         <fieldset>
+	<input type="hidden" name="l" value="<?php echo $_GET['l']?>">
         <legend>Login</legend>
         <?php echo $message; ?>
         <div class="form-group">

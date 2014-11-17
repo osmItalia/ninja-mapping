@@ -1,8 +1,13 @@
 <?php
 include_once '../conf.php';
 
-if (!isset($_GET['e']))
-echo 'No data';
+$a=new Auth($basepath,$dbFile);
+$a->forceAuthentication();
+
+if (!isset($_GET['e'])) {
+	echo 'No data';
+	die();
+	}
 
 $e = $_GET['e'];
 
