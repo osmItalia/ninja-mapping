@@ -11,7 +11,8 @@ if (isset($_POST["un"])&& isset($_POST["pw"]))
     $a=new Auth($basepath,$dbFile);
     if ($a->login($username, $password)) {
         if(isset($_POST['l']) && $_POST['l']!=="" && !strstr($_POST['l'],'logout')){
-            header("Location: http://".$_SERVER['SERVER_NAME'].urldecode($_POST['l']));
+            $l=str_replace("\n","",$_POST['l']);
+            header("Location: http://".$_SERVER['SERVER_NAME'].urldecode($l));
         }
         else
         {
@@ -26,7 +27,7 @@ if (isset($_POST["un"])&& isset($_POST["pw"]))
      <div class="col-md-12">
         <form class="form-horizontal" id="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
         <fieldset>
-	<input type="hidden" name="l" value="<?php echo $_GET['l']?>">
+	<input type="hidden" name="l" value="<?php if(isset($_GET['l'])) echo $_GET['l']?>">
         <legend>Login</legend>
         <?php echo $message; ?>
         <div class="form-group">
