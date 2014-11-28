@@ -1,6 +1,7 @@
-<?php include('header.php');?>
+<?php include('header.php');
+?>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <div class="control-group">
             <div class="controls">
                 <p>Currently selected event: <b>
@@ -30,7 +31,13 @@
                         </fieldset>
                     </form>
                 <?php endif; ?>
-                Seleziona evento:<br/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="control-group">
+            <div class="controls">
+                <p>Seleziona evento:</p>
                 <form  class="form-horizontal" id="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                     <fieldset>
                         <select name="ev" class="form-control">
@@ -46,7 +53,22 @@
                 </form>
             </div>
         </div>
-
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <form  class="form-horizontal" id="form_h" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <fieldset>
+                <input type="hidden" name="archive" value="null">
+                <input  class="btn btn-default" type="submit" value="Archive current track">
+            </fieldset>
+        </form>
+        <?php if (isset($_POST["archive"])) {
+        include_once('lib/functions.php');
+        archiveTrack('',$userid);
+        echo 'Done';
+        }
+        ?>
     </div>
 </div>
 <?php include('footer.php');?>
