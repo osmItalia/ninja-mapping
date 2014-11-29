@@ -36,8 +36,9 @@ if(!isset($NOLOGIN) || $NOLOGIN != 1)
             <li><a href="index.php">Home</a></li>
 			<?php if($a->authenticated()):?>
 				<li><a href="logger.php">Logger</a></li>
-	            		<li><a href="info.php">Info/settings</a></li>
+	            <li><a href="info.php">Info/settings</a></li>
 				<li><a href="radar.php">Radar</a></li>
+				<li><a href="myTracks.php">My Tracks</a></li>
             		<?php endif; ?>
           </ul>
 		<ul class="nav navbar-nav navbar-right">
