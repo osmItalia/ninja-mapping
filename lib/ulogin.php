@@ -3,7 +3,7 @@
 class Auth{
 
 	private $username_cookie="intranet_auth_username";
-	private $session_cookie="intranet_auth_session"; 
+	private $session_cookie="intranet_auth_session";
 	private $id_cookie="intranet_auth_id";
 	private $cookie_expiration="7";
 	public $basepath;
@@ -18,16 +18,16 @@ class Auth{
 		$this->basepath=$basepath;
 		$this->db= new PDO('sqlite:'.$db);
 	}
-	
+
 	public function authenticated(){
 		if (isset($_COOKIE[$this->username_cookie]) &&  $this->sessionCheck()) {
 			return true;
-		} 
+		}
 		else {
 			return false;
 		}
 	}
-	
+
 	public function forceAuthentication() {
 		if (!$this->authenticated()) {
 		$this->redirectToLogin();
@@ -67,7 +67,7 @@ class Auth{
 	}
 	public function login($username, $password) {
 		$logged_in=$this->loginAction($username, $password);
-	   
+
 		if ($logged_in) {
 			$_SESSION['address']=$_SERVER['REMOTE_ADDR'];
 			$_SESSION['username']=$username;
@@ -91,21 +91,21 @@ class Auth{
 		$user=$pdo->fetch();
 		if(is_null($user)) return -1;
 		$password = md5($password);
-		if($password === $user['password']){ 
+		if($password === $user['password']){
 			$logged_in = $user['id'];
 		} else {
 			$logged_in = false;
 		}
 		return $logged_in;
-	}	
-	
+	}
+
 	public function getUsernameById($id){
 		$pdo=$this->db->query("SELECT * FROM user WHERE id = '$id'");
 		$user=$pdo->fetch();
 		if($user)
 		return $user['username'];
 	}
-	
+
 	public function pswCheck($password){
 		return $this->loginAction($this->getUsername(), $password);
 	}
@@ -123,6 +123,11 @@ class Auth{
 		$_SESSION['event_name']=$event['name'];
 
 		return $event['name'];
+	}
+
+	public function getEvent(){
+		if(!isset($_SESSION['event_id'])) return false;
+		return $_SESSION['event_id'];
 	}
 
 	public function unsetEvent(){

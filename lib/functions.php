@@ -1,5 +1,5 @@
 <?php
-function archiveTrack($path,$uid){
+function archiveTrack($path,$uid,$evt){
     global $dbFile;
     $dbh = new PDO('sqlite:'.$path.$dbFile) or die("Error opening DB");
 
@@ -19,10 +19,11 @@ function archiveTrack($path,$uid){
     }
 
     $track_no++;
-    $sql = "INSERT INTO history SELECT $track_no,* FROM track WHERE user_id='$uid'";
-    $dbh->exec($sql);
+    $sql = "INSERT INTO history SELECT $track_no,* FROM track WHERE user_id=$uid AND event_id=$evt";
+    var_dump($sql);
+    var_dump($dbh->exec($sql));
 
-    $sql = "DELETE FROM track WHERE user_id='$uid'";
-    $dbh->exec($sql);
+    $sql = "DELETE FROM track WHERE user_id=$uid";
+    var_dump($dbh->exec($sql));
 }
 ?>

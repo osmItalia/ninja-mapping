@@ -5,4 +5,5 @@ $dbName="database.sqlite";
 $dbFile=$absolutepath.'/'.$dbName;
 
 include('lib/ulogin.php');
+include('lib/functions.php');
 ?>

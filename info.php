@@ -64,9 +64,16 @@
             </fieldset>
         </form>
         <?php if (isset($_POST["archive"])) {
-        include_once('lib/functions.php');
-        archiveTrack('',$userid);
-        echo 'Done';
+            if(!isset($_SESSION['event_id'])){?>
+                <div class="alert alert-danger" role="alert">
+                    <p><a href="info.php" class="alert-link">Selezionare evento</a> nella configurazione prima di continuare</p>
+                </div>
+            <?php
+            }
+            else{
+                archiveTrack('',$userid,$a->getEvent());
+                echo 'Done';
+            }
         }
         ?>
     </div>
