@@ -1,7 +1,7 @@
 <?php
-function archiveTrack($path,$uid,$evt){
+function archiveTrack($uid,$evt){
     global $dbFile;
-    $dbh = new PDO('sqlite:'.$path.$dbFile) or die("Error opening DB");
+    $dbh = new PDO('sqlite:'.$dbFile) or die("Error opening DB");
 
     $sql = "SELECT COUNT(*) FROM history";
     $res= $dbh->query($sql);
@@ -24,9 +24,9 @@ function archiveTrack($path,$uid,$evt){
     $sql = "DELETE FROM track WHERE user_id=$uid";
 }
 
-function track2GPX($path,$t){
+function track2GPX($t){
     global $dbFile;
-    $dbh = new PDO('sqlite:'.$path.$dbFile) or die("Error opening DB");
+    $dbh = new PDO('sqlite:'.$dbFile) or die("Error opening DB");
 
     $sql = 'SELECT * FROM history WHERE track_id='.$t.' ORDER BY timestamp ASC';
     $qresult=$dbh->query($sql)->fetchAll(PDO::FETCH_ASSOC);

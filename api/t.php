@@ -17,7 +17,7 @@ if (isset($_GET['lat']))
     $dir=round($_GET['dir']);
     $nota=substr($_GET['note'],0,255);
 
-    $dbh = new PDO('sqlite:../'.$dbFile) or die("Error opening DB");
+    $dbh = new PDO('sqlite:'.$dbFile) or die("Error opening DB");
 
     if ( $nota=='..new..') {
             // copia tutti i record dell'utente nella tabella history

@@ -11,7 +11,7 @@ if (!isset($_GET['u'])) {
 
 $u = $_GET['u'];
 
-$dbh = new PDO('sqlite:../'.$dbFile) or die("Error opening DB");
+$dbh = new PDO('sqlite:'.$dbFile) or die("Error opening DB");
 
 $sql = 'SELECT * FROM track WHERE user_id='.$u.' ORDER BY timestamp DESC';
 $qresult=$dbh->query($sql)->fetchAll(PDO::FETCH_ASSOC);

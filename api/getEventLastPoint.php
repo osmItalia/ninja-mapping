@@ -11,7 +11,7 @@ if (!isset($_GET['e'])) {
 
 $e = $_GET['e'];
 
-$dbh = new PDO('sqlite:../'.$dbFile) or die("Error opening DB");
+$dbh = new PDO('sqlite:'.$dbFile) or die("Error opening DB");
 
 $sql = 'SELECT  t.user_id,lat,lon,t.timestamp,altitude,speed,direction,accuracy,note FROM track AS t INNER JOIN (SELECT user_id, MAX(timestamp) AS timestamp FROM track GROUP BY user_id) AS q ON t.user_id=q.user_id AND t.timestamp=q.timestamp WHERE t.event_id ='.$e;
 
