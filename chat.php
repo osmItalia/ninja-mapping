@@ -28,13 +28,25 @@ include('header.php');
 </div>
 </div>
 <script>
+var nowTime=0;
 function sendMessage(){
+ var message=$('#msg').val();
+ $.get('chat/postMessage.php', {'m':message},function(){});
+ $('#msg').val('');
+}
+function getOldMessages(){
+    nowTime= Math.floor(Date.now()/1000);
+    $.get('chat/getPreviousMessages.php', {'ts': nowTime},function(answer){console.log(answer)});
+    //nel db eventid->event_id, aggiungere author_name (in post basta recuperarlo da ulogin)
+}
 
+function getLatestMessages(){
+    $.get('chat/getLatestMessages.php', {'ts': nowTime},function(answer){console.log(answer)});
+    nowTime= Math.floor(Date.now()/1000);
 }
-function getMessage(){
-    //now unix
-    //call getbefore (now)
-    //successivamente chiama getlatest con l'ultimo timestamp che è stato visto.
-}
+window.onload=function(){
+getOldMessages();
+};
+window.setInterval(function(){ getLatestMessages(); }, 3000);
 </script>
 <?php include('footer.php');?>

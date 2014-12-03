@@ -8,4 +8,5 @@ $message=$_GET['m'];
 
 $q="INSERT INTO chat VALUES (".$a->getEvent().",".time().",".$a->getUid().",'".$message."')";
 $dbh->exec($q);
+$dbh = null;
 ?>
