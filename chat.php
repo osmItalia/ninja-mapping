@@ -10,6 +10,11 @@ include('header.php');
 <div class="row">
     <div class="col-md-12">
         <h1>Chat</h1>
+<?php if(!isset($_SESSION['event_id'])):?>
+    <div class="alert alert-danger" role="alert">
+    <p><a href="info.php" class="alert-link">Selezionare evento</a> nella configurazione prima di continuare</p>
+    </div>
+<?php elseif:?>
         <div id="chatMessages">
         <div class="bubble">
             <p class="head"><span class="timestamp">3949848293832</span> - <span class="person">Antani</span> wrote:</p>
@@ -49,4 +54,5 @@ getOldMessages();
 };
 window.setInterval(function(){ getLatestMessages(); }, 3000);
 </script>
+<?php endif; ?>
 <?php include('footer.php');?>
