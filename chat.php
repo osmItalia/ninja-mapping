@@ -3,7 +3,7 @@ include('header.php');
 ?>
 
 <style>
-.bubble{width:50%; border:1px solid blue;}
+.bubble{width:50%; border:1px solid blue; clear:both;}
 .bubble .timestamp{font-style:italic;}
 .bubble .person{font-weight:bold;}
 </style>
@@ -16,10 +16,7 @@ include('header.php');
     </div>
 <?php else:?>
         <div id="chatMessages">
-        <div class="bubble">
-            <p class="head"><span class="timestamp">3949848293832</span> - <span class="person">Antani</span> wrote:</p>
-            <p class="message">Prematurata a destra</p>
-        </div>
+
         </div>
     </div>
 </div>
@@ -36,19 +33,51 @@ include('header.php');
 var nowTime=0;
 function sendMessage(){
  var message=$('#msg').val();
- $.get('chat/postMessage.php', {'m':message},function(){});
+ $.get('chat/postMessage.php', {'m':message},function(){getLatestMessages();});
  $('#msg').val('');
 }
 function getOldMessages(){
     nowTime= Math.floor(Date.now()/1000);
-    $.get('chat/getPreviousMessages.php', {'ts': nowTime},function(answer){console.log(answer)});
-    //nel db eventid->event_id, aggiungere author_name (in post basta recuperarlo da ulogin)
+    $.get('chat/getPreviousMessages.php', {'ts': nowTime},function(answer){
+	if(!$.isPlainObject(answer))
+	{
+	console.log(answer);
+	return;
+	}
+	
+	$.each(answer,function(i,t){
+		var msg=formatBubble(t['timestamp'],t['author_name'],t['message']);
+		$('#chatMessages').append(msg);
+	});
+	});
 }
 
 function getLatestMessages(){
-    $.get('chat/getLatestMessages.php', {'ts': nowTime},function(answer){console.log(answer)});
+    $.get('chat/getLatestMessages.php', {'ts': nowTime},function(answer){
+	if(!$.isPlainObject(answer))
+	{
+	console.log(answer);
+	return;
+	}
+	
+	$.each(answer,function(i,t){
+		var msg=formatBubble(t['timestamp'],t['author_name'],t['message']);
+		$('#chatMessages').append(msg);
+	});
+	});
     nowTime= Math.floor(Date.now()/1000);
 }
+
+function formatBubble(timestamp,person,message){
+      var date=new Date(timestamp*1000);
+	  var dateString=date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getYear();
+	  dateString+=' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+      var bubble='<div class="bubble">';
+      bubble+='<p class="head"><span class="timestamp">'+dateString+'</span> - <span class="person">'+person+'</span> wrote:</p>';
+      bubble+='<p class="message">'++'</p>';
+      bubble+='</div>';
+}
+
 window.onload=function(){
 getOldMessages();
 };
