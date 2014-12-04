@@ -37,45 +37,43 @@ function sendMessage(){
  $('#msg').val('');
 }
 function getOldMessages(){
-    nowTime= Math.floor(Date.now()/1000);
-    $.get('chat/getPreviousMessages.php', {'ts': nowTime},function(answer){
-	if(!$.isPlainObject(answer))
-	{
-	console.log(answer);
-	return;
-	}
+    $.get('chat/getAllMessages.php', function(answer){
+	answer=JSON.parse(answer);
 	
 	$.each(answer,function(i,t){
-		var msg=formatBubble(t['timestamp'],t['author_name'],t['message']);
-		$('#chatMessages').append(msg);
+	var msg=formatBubble(t['timestamp'],t['author_name'],t['message']);
+	$('#chatMessages').append(msg);
+        if(t['timestamp']>nowTime)nowTime=t['timestamp'];
 	});
 	});
 }
 
 function getLatestMessages(){
     $.get('chat/getLatestMessages.php', {'ts': nowTime},function(answer){
-	if(!$.isPlainObject(answer))
-	{
-	console.log(answer);
-	return;
-	}
+	answer=JSON.parse(answer);
 	
 	$.each(answer,function(i,t){
 		var msg=formatBubble(t['timestamp'],t['author_name'],t['message']);
 		$('#chatMessages').append(msg);
+	if(t['timestamp']>nowTime)nowTime=t['timestamp'];
 	});
 	});
-    nowTime= Math.floor(Date.now()/1000);
+}
+
+function datePad(val){
+	return ('0' + val).slice(-2) ;
 }
 
 function formatBubble(timestamp,person,message){
       var date=new Date(timestamp*1000);
-	  var dateString=date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getYear();
-	  dateString+=' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+
+	  var dateString=datePad(date.getDate())+'/'+datePad(date.getMonth()+1)+'/'+datePad(date.getFullYear());
+	  dateString+=' '+datePad(date.getHours())+':'+datePad(date.getMinutes())+':'+datePad(date.getSeconds());
       var bubble='<div class="bubble">';
       bubble+='<p class="head"><span class="timestamp">'+dateString+'</span> - <span class="person">'+person+'</span> wrote:</p>';
-      bubble+='<p class="message">'++'</p>';
+      bubble+='<p class="message">'+message+'</p>';
       bubble+='</div>';
+	return bubble;
 }
 
 window.onload=function(){
