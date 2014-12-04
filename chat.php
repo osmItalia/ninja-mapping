@@ -14,7 +14,7 @@ include('header.php');
     <div class="alert alert-danger" role="alert">
     <p><a href="info.php" class="alert-link">Selezionare evento</a> nella configurazione prima di continuare</p>
     </div>
-<?php elseif:?>
+<?php else:?>
         <div id="chatMessages">
         <div class="bubble">
             <p class="head"><span class="timestamp">3949848293832</span> - <span class="person">Antani</span> wrote:</p>
