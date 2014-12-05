@@ -3,7 +3,16 @@ include('header.php');
 ?>
 
 <style>
-.bubble{width:50%; border:1px solid blue; clear:both;}
+.bubble{
+width:50%; 
+border:1px solid #2d6ca2;
+clear:both;
+margin:5px;
+padding:5px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+}
 .bubble .timestamp{font-style:italic;}
 .bubble .person{font-weight:bold;}
 </style>
